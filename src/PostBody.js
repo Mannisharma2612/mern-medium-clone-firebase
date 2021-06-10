@@ -13,6 +13,7 @@ import firebase from 'firebase';
 import { Form } from 'react-bootstrap';
 import Button from '@material-ui/core/Button';
 
+
 const PostBody = () => {
   const [dataPost, setDataPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,9 +37,9 @@ const PostBody = () => {
     db.collection("posts")
     .doc(id)
     .collection("comments")
-    .orderBy('timestamp', 'desc')
+    .orderBy('timestamp','desc')
     .onSnapshot((snapshot) => {
-      setComments(snapshot.docs.map((doc) => ({text: doc.data()})));
+      setComments(snapshot.docs.map((doc) => (doc.data())));
     });
   }, [id]);
 
@@ -114,17 +115,16 @@ const PostBody = () => {
             </div>
           </div>
 
-            <div>
-              {comments.map((comt) => {
-                <p>
-                  <strong>{comt.text}</strong>
-                </p>
-              })}
-            </div>
 
           <div className="postBody_Container">
             <h3>Comments: </h3>
             
+            
+            <div className="postBody_Container">
+            {comments.map((comment) => ( 
+                <h4 style={{paddingTop: '10px'}}>{comment.text}</h4>
+              ))}
+            </div>
             
             <Form>
               <Form.Group>
@@ -132,9 +132,10 @@ const PostBody = () => {
                   className="inp"
                   type="text"
                   placeholder="Add a comment... "
-                  value={comment}
+                 
                   onChange={(e) => setComment(e.target.value)}
                   style={{borderLeft:'0',borderRight:'0',borderTop:'0',width:'70%'}}
+                  required
                 />
                 <Button 
                   style={{marginLeft:'10px'}}
