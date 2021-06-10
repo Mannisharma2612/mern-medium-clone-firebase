@@ -1,5 +1,4 @@
 import React from "react";
-import StarIcon from "@material-ui/icons/Star";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ const MediumPosts = ({ id, data }) => {
       <div className="MediumPosts">
         <div className="MediumPosts_Text">
           <h2>{data.title}</h2>
-          <h4 style={{color: 'black', paddingTop: '10px'}}>{data.author}</h4>
+          <h4 style={{color: 'black', paddingTop: '10px'}}>-{data.author}</h4>
           <p>{data.paragraph}</p>
 
           <div className="MediumPosts_TimeStamps">
@@ -27,7 +26,7 @@ const MediumPosts = ({ id, data }) => {
                   "YYYYMMDD"
                 ).fromNow()}
 
-                <StarIcon />
+              
               </span>
             </div>
             <BookmarkBorderIcon className="MediumPosts_Bookmark" />

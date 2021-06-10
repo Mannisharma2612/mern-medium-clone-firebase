@@ -6,9 +6,12 @@ import EditIcon from '@material-ui/icons/Edit';
 import { useParams } from "react-router";
 import {useHistory} from 'react-router-dom';
 import db from "./firebase";
+import './App.scss';
 import { CircularProgress } from "@material-ui/core";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import firebase from 'firebase';
+import { Form } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
 
 const PostBody = () => {
   const [dataPost, setDataPost] = useState(null);
@@ -67,6 +70,8 @@ const PostBody = () => {
     });
   }
 
+  
+
 
   const postComment = (event) => {
     event.preventDefault();
@@ -88,7 +93,7 @@ const PostBody = () => {
       ) : (
         <div className="postBody_container postContainer">
           <h1>{dataPost?.title}</h1>
-          <h2 style={{paddingTop: '10px', textDecoration:'underline'}}>{dataPost?.author}</h2>
+          <h2 style={{paddingTop: '20px'}}>-{'  '} {dataPost?.author}</h2>
 
           <div
             className="postBody_image"
@@ -121,21 +126,31 @@ const PostBody = () => {
             <h3>Comments: </h3>
             
             
-            <form>
-              <input
-                type="text"
-                placeholder="Add a comment... "
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <button
-                disabled={!comment}
-                type="submit"
-                onClick={postComment}
-              >
+            <Form>
+              <Form.Group>
+                <Form.Control
+                  className="inp"
+                  type="text"
+                  placeholder="Add a comment... "
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  style={{borderLeft:'0',borderRight:'0',borderTop:'0',width:'70%'}}
+                />
+                <Button 
+                  style={{marginLeft:'10px'}}
+                  variant="outlined" 
+                  color="primary"
+                  size='medium'
+                  disabled={!comment}
+                  type="submit"
+                  onClick={postComment}
+                >
                 Post
-              </button>
-            </form>
+              </Button>
+              </Form.Group>
+              
+              
+            </Form>
           </div>
           
         </div>
